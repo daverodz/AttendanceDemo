@@ -28,7 +28,19 @@
 				controller  : 'attendanceController'
 			});
 	});
-
+	
+	attApp.service('sectionService', function() {
+		var name = '';
+		return{
+			getName: function(){
+				return name;
+			},
+			setName: function(value){
+				name = value;
+			}
+		};
+	});
+			
 	// create the controller and inject Angular's $scope
 	attApp.controller('mainController', function($scope, $location) {
 		// create a message to display in our view
@@ -38,23 +50,25 @@
       	};
 	});
 
-	attApp.controller('sectionsController', function($scope, $location) {
+	attApp.controller('sectionsController', function($scope, $location, sectionService) {
 		$scope.sections = [
         {name:'sections 1'},
-        {name:'sections 2'},
+        {name:'Alexanders Section'},
         {name:'sections 3'},
         {name:'sections 4'}
       ];
-      $scope.section = function () {
-        	$location.path("/section");
+        $scope.switchSection = function (sectionName) {
+        	sectionService.setName(sectionName.name);
+		$location.path("/section");
       	};
       	$scope.createsections = function () {
       	};
 	});
 
-	attApp.controller('sectionController', function($scope) {
-		$scope.message = 'Section Page';
+	attApp.controller('sectionController', function($scope, sectionService) {
+		$scope.message = 'Section: ' + sectionService.getName();
 	});
 	attApp.controller('attendanceController', function($scope) {
 		$scope.message = 'Contact us! JK. This is just a demo.';
 	});
+	
