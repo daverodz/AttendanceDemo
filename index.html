@@ -16,7 +16,7 @@
 </head>
 
 <!-- define angular controller -->
-<body ng-controller="mainController">
+<body >
 
 
   <nav class="navbar navbar-default">
@@ -24,9 +24,24 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="/">Attendance App</a>
       </div>
-
+	
       <ul class="nav navbar-nav navbar-right">
-      </ul>
+      <form class="navbar-form navbar-right" role="search" ng-controller="loginFormCtrl">
+	<div ng-class="{ 'hidden' : !emailArea}">
+	<div class="form-group">
+	<input type="text" class="form-control col-sm-1" name="email" placeholder="Email" ng-model="login.Email">
+	</div>
+	<div class="form-group">
+	<input type="text" class="form-control col-sm-1" name="password" placeholder="Password" ng-model="login.Password">
+	</div>
+	<button type="submit" class="btn btn-default" ng-click="submit(true)" >Sign In </button>
+	</div>
+	<div class="" ng-class="{ 'hidden' : !loginArea}">
+		Welcome: {{login.Email}}
+		<button type="submit" class="btn btn-default" ng-click="submit(false)"> Logout </button>
+	</div>
+	</form>
+	</ul>
     </div>
   </nav>
 

@@ -8,7 +8,7 @@
 			// route for the login page
 			.when('/', {
 				templateUrl : 'pages/login.html',
-				controller  : 'mainController'
+				controller  : 'loginFormCtrl'
 			})
 
 			// route for the sections list page
@@ -42,11 +42,23 @@
 	});
 			
 	// create the controller and inject Angular's $scope
-	attApp.controller('mainController', function($scope, $location) {
+	attApp.controller('loginFormCtrl', function($scope, $location) {
 		// create a message to display in our view
-		$scope.message = 'Everyone come and see how good I look!';
-		$scope.login = function () {
-        	$location.path("/sections");
+		$scope.emailArea = '!emailArea';	
+		$scope.submit = function (loginAction) {
+        	if(loginAction){
+		$scope.loginArea = '!loginArea';
+		$scope.emailArea = '';	   
+		$location.path("/sections");
+		}else{
+		$scope.loginArea = '';
+		$scope.emailArea = '!emailArea';
+		$scope.login.Email = '';
+		$scope.login.Password = '';
+		$location.path("/");
+		}
+
+
       	};
 	});
 
